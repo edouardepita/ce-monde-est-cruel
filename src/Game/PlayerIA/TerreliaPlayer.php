@@ -16,14 +16,12 @@ class TerreliaPlayer extends Player
     protected $result;
 
     protected $oppositePlayer;
-    protected $lastchance;
 
     public function getChoice()
     {   
 
         if ($this->result->getNbRound() == 0){
             $this->oppositePlayer = false;
-            $this->lastchance = false;
             return parent::rockChoice();
         }
             
@@ -34,47 +32,7 @@ class TerreliaPlayer extends Player
             $this->oppositePlayer = true;
         }
 
-        if ($this->lastchance){
-            if ($this->result->getNbRound() % 2 == 0){
-                if ($this->result->getLastChoiceFor($this->mySide) == 'rock'){
-                    return parent::scissorsChoice();    
-                }
-                if ($this->result->getLastChoiceFor($this->mySide) == 'paper'){
-                    return parent::rockChoice();
-                }
-                if ($this->result->getLastChoiceFor($this->mySide) == 'scissor'){
-                    return parent::paperChoice();
-                }
-            }
-            else{
-                if ($this->result->getLastChoiceFor($this->opponentSide) == 'rock'){
-                    return parent::paperChoice();
-                }
-                if ($this->result->getLastChoiceFor($this->opponentSide) == 'paper'){
-                    return parent::scissorsChoice();
-                }
-                if ($this->result->getLastChoiceFor($this->opponentSide) == 'scissor'){
-                    return parent::rockChoice();
-                }
-            }
-        }
-
         if ($this->oppositePlayer){
-
-            if ($this->result->getNbRound() == 15) 
-            {
-                $ennemyScore = 0;
-                $myScore = 0;
-                for ($i = 5; $i <= 15; $i++){
-                    $myScore += $this->result->getScoresFor($this->mySide)[$i];
-                    $ennemyScore += $this->result->getScoresFor($this->opponentSide)[$i];
-                }
-                if ($ennemyScore > $myScore){
-                    $lastchance = true;
-                    $oppositePlayer = false;
-                }
-            }
-
             if ($this->result->getLastChoiceFor($this->mySide) == 'rock'){
                 return parent::scissorsChoice();    
             }
