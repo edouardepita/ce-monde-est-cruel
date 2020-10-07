@@ -15,17 +15,48 @@ class TerreliaPlayer extends Player
     protected $opponentSide;
     protected $result;
 
+    protected $oppositePlayer;
+
     public function getChoice()
     {   
-        if ($this->result->getLastChoiceFor($this->opponentSide) == 'rock'){
-            return parent::paperChoice();
-        }
-        if ($this->result->getLastChoiceFor($this->opponentSide) == 'paper'){
-            return parent::scissorsChoice();
-        }
-        if ($this->result->getLastChoiceFor($this->opponentSide) == 'scissor'){
+
+        if ($this->result->getNbRound() == 0){
+            $this->oppositePlayer = false;
             return parent::rockChoice();
         }
+            
+        if (($this->result->getNbRound() >= 4)
+            && ($this->result->getChoicesFor($this->opponentSide)[1] == 'paper')
+            && ($this->result->getChoicesFor($this->opponentSide)[2] == 'scissor') 
+            && ($this->result->getChoicesFor($this->opponentSide)[3] == 'rock' )){
+            $this->oppositePlayer = true;
+        }
+
+        if ($this->oppositePlayer){
+            if ($this->result->getLastChoiceFor($this->mySide) == 'rock'){
+                return parent::scissorsChoice();    
+            }
+            if ($this->result->getLastChoiceFor($this->mySide) == 'paper'){
+                return parent::rockChoice();
+            }
+            if ($this->result->getLastChoiceFor($this->mySide) == 'scissor'){
+                return parent::paperChoice();
+            }
+        }
+        else{
+            if ($this->result->getLastChoiceFor($this->opponentSide) == 'rock'){
+                return parent::paperChoice();
+            }
+            if ($this->result->getLastChoiceFor($this->opponentSide) == 'paper'){
+                return parent::scissorsChoice();
+            }
+            if ($this->result->getLastChoiceFor($this->opponentSide) == 'scissor'){
+                return parent::rockChoice();
+            }
+        }
+
+        // check last
+        
         
         // -------------------------------------    -----------------------------------------------------
         // How to get my Last Choice           ?    $this->result->getLastChoiceFor($this->mySide) -- if 0 (first round)
