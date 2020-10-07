@@ -5,7 +5,7 @@ namespace Hackathon\PlayerIA;
 use Hackathon\Game\Result;
 
 /**
- * Class TerreliaPlayers
+ * Class RugosaPlayers
  * @package Hackathon\PlayerIA
  * @author YOUR NAME HERE
  */
@@ -16,7 +16,17 @@ class TerreliaPlayer extends Player
     protected $result;
 
     public function getChoice()
-    {
+    {   
+        if ($this->result->getLastChoiceFor($this->opponentSide) == 'rock'){
+            return parent::paperChoice();
+        }
+        if ($this->result->getLastChoiceFor($this->opponentSide) == 'paper'){
+            return parent::scissorsChoice();
+        }
+        if ($this->result->getLastChoiceFor($this->opponentSide) == 'scissor'){
+            return parent::rockChoice();
+        }
+        
         // -------------------------------------    -----------------------------------------------------
         // How to get my Last Choice           ?    $this->result->getLastChoiceFor($this->mySide) -- if 0 (first round)
         // How to get the opponent Last Choice ?    $this->result->getLastChoiceFor($this->opponentSide) -- if 0 (first round)
@@ -40,7 +50,6 @@ class TerreliaPlayer extends Player
         // -------------------------------------    -----------------------------------------------------
         // How can i display the result of each round ? $this->prettyDisplay()
         // -------------------------------------    -----------------------------------------------------
-
 
         return parent::rockChoice();
 
