@@ -7,7 +7,7 @@ use Hackathon\Game\Result;
 /**
  * Class RugosaPlayers
  * @package Hackathon\PlayerIA
- * @author YOUR NAME HERE
+ * @author Edouard MAHE
  */
 class TerreliaPlayer extends Player
 {
