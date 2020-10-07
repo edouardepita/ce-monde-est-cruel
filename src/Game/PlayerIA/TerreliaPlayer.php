@@ -25,7 +25,9 @@ class TerreliaPlayer extends Player
     2 - Je commence à renvoyer ce qui bat le cout n-1 
     3 - Ayant commencé par une pierre, je verifie si l'ennemi utilise la meme stratégie (cout 2 : papier ...)
     4 - Si au bout du 15eme round je ne suis toujours pas gagnant (calcul entre 10 et 15), j'alterne entre retourner ce qui contre le coup n-1 et contrer le contre (pour éviter que la stratégie soit anticipable)
-  
+
+    J'ai un score egale à 2 personnes donc je pense que on ne rentre jamais dans "last chance" (je ne comprend pas pq)
+
     */
     public function getChoice()
     {   
